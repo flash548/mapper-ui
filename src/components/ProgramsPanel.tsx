@@ -86,6 +86,18 @@ export const ProgramsPanel = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
+      <Box sx={{ paddingBottom: "1rem" }}>
+        <Typography>
+          Here you can create new program IDs and form IDs.
+        </Typography>
+        <Typography>
+          You can also create new security functions for a given program or form
+          ID.{" "}
+        </Typography>
+        <Typography>
+          Click on a Program (or one of its Forms) in order to map Roles to it.
+        </Typography>
+      </Box>
       <Box
         sx={{ width: "50%", paddingBottom: "1rem" }}
         display={"flex"}
