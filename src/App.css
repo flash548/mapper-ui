@@ -1,0 +1,8 @@
+#root {
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  padding: 2rem;
+}
+

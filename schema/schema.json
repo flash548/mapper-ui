@@ -1,0 +1,775 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+      "title": "OpenAPI definition",
+      "version": "v0"
+  },
+  "servers": [
+      {
+          "url": "http://localhost:8081",
+          "description": "Generated server url"
+      }
+  ],
+  "paths": {
+      "/roles/add-role": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Adds a new role to the database",
+              "operationId": "postRole",
+              "parameters": [
+                  {
+                      "name": "roleName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/Role"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/remove-security-function": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Removes a security function underneath an existing program",
+              "description": "Removes the security function as well from all usages within program",
+              "operationId": "removeSecurityFunction",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "securityFunctionName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/remove-role-from-program": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Removes a role from an existing program",
+              "operationId": "removeRoleFromProgram",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "roleName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/remove-role-from-form": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Removes a role from an existing form within an existing program",
+              "operationId": "removeRoleFromProgramForm",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "formName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "roleName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/remove-form": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Removes a form underneath an existing program",
+              "operationId": "removeForm",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "formName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/permissions-for-program": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Gets a list of strings representing the security functions for a program",
+              "operationId": "getSecurityFunctionsForResource",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "formName",
+                      "in": "query",
+                      "required": false,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/SecurityFunctionList"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/map-role-to-program": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Maps a role to an existing program with given security functions of that program",
+              "operationId": "mapRoleToProgram",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "roleName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/map-role-to-form": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Maps a role to form within a program with given security functions of that program",
+              "operationId": "mapRoleToForm",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "formName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "roleName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/add-security-functions": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Adds a new security function to an existing program",
+              "operationId": "postSecurityFunctions",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  },
+                  "required": true
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/add-program": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Add a new program",
+              "operationId": "postProgram",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  },
+                  "409": {
+                      "description": "Program already exists",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/add-form": {
+          "post": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Adds a new form underneath an existing program",
+              "operationId": "postForm",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "formName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/rolesDetails": {
+          "get": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Gets all roles with their associated programs/functions",
+              "operationId": "getRoleDetails",
+              "parameters": [
+                  {
+                      "name": "roleName",
+                      "in": "query",
+                      "required": false,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/RoleWithProgramsListDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/roleNames": {
+          "get": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Gets all role names",
+              "operationId": "getRoles",
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/RoleListDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/programs": {
+          "get": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Gets all programs",
+              "operationId": "getPrograms",
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramListDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/programs/{id}": {
+          "get": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Gets a program by its ID",
+              "operationId": "getProgram",
+              "parameters": [
+                  {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                          "type": "integer",
+                          "format": "int64"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "*/*": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ProgramDto"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/delete-role": {
+          "delete": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Hard deletes a role (and all its forms/security associations of which)",
+              "operationId": "deleteRole",
+              "parameters": [
+                  {
+                      "name": "roleName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "204": {
+                      "description": "No Content"
+                  }
+              }
+          }
+      },
+      "/delete-program": {
+          "delete": {
+              "tags": [
+                  "role-mapping-controller"
+              ],
+              "summary": "Hard deletes a program (and all its forms/security functions)",
+              "operationId": "deleteProgram",
+              "parameters": [
+                  {
+                      "name": "programName",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "responses": {
+                  "204": {
+                      "description": "No Content"
+                  }
+              }
+          }
+      }
+  },
+  "components": {
+      "schemas": {
+          "Role": {
+              "required": [
+                  "name"
+              ],
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "integer",
+                      "format": "int64"
+                  },
+                  "name": {
+                      "type": "string"
+                  }
+              }
+          },
+          "FormDto": {
+              "type": "object",
+              "properties": {
+                  "name": {
+                      "type": "string"
+                  },
+                  "roleMappings": {
+                      "type": "object",
+                      "additionalProperties": {
+                          "type": "array",
+                          "items": {
+                              "type": "string"
+                          }
+                      }
+                  }
+              }
+          },
+          "ProgramDto": {
+              "type": "object",
+              "properties": {
+                  "name": {
+                      "type": "string"
+                  },
+                  "forms": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/FormDto"
+                      }
+                  },
+                  "roleMappings": {
+                      "type": "object",
+                      "additionalProperties": {
+                          "type": "array",
+                          "items": {
+                              "type": "string"
+                          }
+                      }
+                  },
+                  "securityFunctions": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  }
+              }
+          },
+          "SecurityFunctionList": {
+              "type": "object",
+              "properties": {
+                  "securityFunctions": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  }
+              }
+          },
+          "RoleWithProgramsDto": {
+              "type": "object",
+              "properties": {
+                  "roleName": {
+                      "type": "string"
+                  },
+                  "programs": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/ProgramDto"
+                      }
+                  }
+              }
+          },
+          "RoleWithProgramsListDto": {
+              "type": "object",
+              "properties": {
+                  "roles": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/RoleWithProgramsDto"
+                      }
+                  }
+              }
+          },
+          "RoleListDto": {
+              "type": "object",
+              "properties": {
+                  "roles": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/Role"
+                      }
+                  }
+              }
+          },
+          "ProgramListDto": {
+              "type": "object",
+              "properties": {
+                  "programs": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/ProgramDto"
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
